@@ -1,7 +1,8 @@
-package com.karbyshev.catstock
+package com.karbyshev.catstock.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.karbyshev.catstock.R
 
 class MainActivity : AppCompatActivity() {
 
