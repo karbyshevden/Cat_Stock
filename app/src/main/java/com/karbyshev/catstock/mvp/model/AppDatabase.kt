@@ -1,12 +1,6 @@
-package com.karbyshev.catstock.model
+package com.karbyshev.catstock.mvp.model
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.DatabaseConfiguration
-import android.arch.persistence.room.InvalidationTracker
-import android.arch.persistence.room.RoomDatabase
+import com.reactiveandroid.annotation.Database
 
-@Database(entities = arrayOf(Item::class), version = 1)
-abstract class AppDatabase : RoomDatabase() {
-
-}
+@Database(name = "AppDatabase", version = 1)
+class AppDatabase

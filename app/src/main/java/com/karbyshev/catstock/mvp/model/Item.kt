@@ -1,25 +1,31 @@
-package com.karbyshev.catstock.model
+package com.karbyshev.catstock.mvp.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
 import com.karbyshev.catstock.util.formatDate
+import com.reactiveandroid.Model
+import com.reactiveandroid.annotation.Column
+import com.reactiveandroid.annotation.PrimaryKey
+import com.reactiveandroid.annotation.Table
 import java.util.*
 
-@Entity
-class Item {
+@Table(name = "Notes", database = AppDatabase::class)
+class Item : Model {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     var id: Long = 0
 
+    @Column(name = "title")
     var title: String = ""
 
+    @Column(name = "text")
     var text: String = ""
 
+    @Column(name = "created_at")
     var createAt: Date? = null
 
+    @Column(name = "change_at")
     var changedAt: Date? = null
 
-    constructor(title: String, createDate: Date?) {
+    constructor(title: String, createDate: Date) {
         this.title = title
         this.createAt = createDate
         this.changedAt = createDate

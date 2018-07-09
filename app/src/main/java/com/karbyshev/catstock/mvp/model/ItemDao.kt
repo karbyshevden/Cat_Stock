@@ -1,19 +1,26 @@
-package com.karbyshev.catstock.model
+package com.karbyshev.catstock.mvp.model
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Query
+
+import com.reactiveandroid.query.Delete
+import com.reactiveandroid.query.Select
 import java.util.*
 
-@Dao
-interface ItemDao{
+class ItemDao {
 
-    @Query("SELECT * FROM item")
-    fun loadAllNotes()
+    fun createNote(): Item {
+        val note = Item("New note", Date())
+        note.save()
+        return note
+    }
 
-    @Query("DELETE FROM item")
-    fun clearTable()
+    fun saveNote(note: Item): Long = note.save()
 
-    @Delete
-    fun deleteAllNotes()
+    fun loadAllNotes(): MutableList<Item> = Select.from(Item::class.java).fetch()
+
+    fun getNoteById(noteId: Long): Item? = Select.from(Item::class.java).where("id = ?", noteId).fetchSingle()
+
+    fun deleteAllNotes() = Delete.from(Item::class.java).execute()
+
+    fun deleteNote(note: Item) = note.delete()
 }
+
