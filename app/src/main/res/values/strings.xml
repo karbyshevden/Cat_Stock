@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cat Stock</string>
+    <string name="title">Title</string>
+    <string name="input_your_text">Input your text</string>
 </resources>
