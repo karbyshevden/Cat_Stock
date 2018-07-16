@@ -14,10 +14,10 @@ class Item : Model {
     var id: Long = 0
 
     @Column(name = "title")
-    var title: String = ""
+    var title: String? = null
 
     @Column(name = "text")
-    var text: String = ""
+    var text: String? = null
 
     @Column(name = "created_at")
     var createAt: Date? = null
