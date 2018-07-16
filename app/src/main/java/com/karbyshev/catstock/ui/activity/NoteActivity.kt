@@ -139,6 +139,9 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNoteInfo -> presenter.showNoteInfoDialog()
+
+            R.id.menuDeleteNote -> presenter.showNoteDeleteDialog()
+
         }
         return super.onOptionsItemSelected(item)
     }

@@ -5,4 +5,9 @@
         android:id="@+id/menuNoteInfo"
         android:title="@string/note_info"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menuDeleteNote"
+        android:title="@string/delete"
+        app:showAsAction="never"
+        />
 </menu>

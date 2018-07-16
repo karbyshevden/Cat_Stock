@@ -52,7 +52,6 @@ dependencies {
     kapt 'com.arello-mobile:moxy-compiler:1.5.5'
 
     implementation 'com.reactiveandroid:reactiveandroid:1.4.3'
-    implementation 'org.greenrobot:eventbus:3.1.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 

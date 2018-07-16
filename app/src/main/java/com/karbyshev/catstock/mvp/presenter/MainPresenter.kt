@@ -1,18 +1,13 @@
 package com.karbyshev.catstock.mvp.presenter
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.karbyshev.catstock.App
-import com.karbyshev.catstock.bus.NoteDeleteAction
-import com.karbyshev.catstock.bus.NoteEditAction
 import com.karbyshev.catstock.mvp.model.Item
 import com.karbyshev.catstock.mvp.model.ItemDao
 import com.karbyshev.catstock.mvp.view.MainView
 import com.karbyshev.catstock.util.getNotesSortMethodName
 import com.karbyshev.catstock.util.setNotesSortMethod
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject
 
@@ -34,7 +29,6 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     init {
         App.graph.inject(this)
-        EventBus.getDefault().register(this)
     }
 
     override fun onFirstViewAttach() {
@@ -58,8 +52,6 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun openNewNote() {
         val newNote = noteDao.createNote()
         viewState.openNoteScreen(newNote.id)
-//        notesList.add(newNote)
-//        sortNotesBy(getCurrentSortMethod())
     }
 
     fun openNote(position: Int) {
@@ -78,20 +70,6 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun sortNotesBy(sortMethod: SortNotesBy) {
         notesList.sortWith(sortMethod)
         setNotesSortMethod(sortMethod.toString())
-        viewState.updateView()
-    }
-
-    @Subscribe
-    fun onNoteEdit(action: NoteEditAction) {
-        val notePosition = getNotePositionById(action.noteId)
-        notesList[notePosition] = noteDao.getNoteById(action.noteId)!!
-        sortNotesBy(getCurrentSortMethod())
-    }
-
-    @Subscribe
-    fun onNoteDelete(action: NoteDeleteAction) {
-        val notePosition = getNotePositionById(action.noteId)
-        notesList.removeAt(notePosition)
         viewState.updateView()
     }
 
