@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Котячий запас</string>
+    <string name="notes_list_empty">Утебе в запасі жодного пухнастика, \\nтисни \"+\"</string>
+    <string name="input_your_text">Опиши свого улюбленця...</string>
+    <string name="all_notes_deleted">Більш нема нікого...(</string>
+    <string name="delete">Відалити</string>
+    <string name="delete_all">Всіх відпустити</string>
+    <string name="no">Ні</string>
+    <string name="note_deleted">Пухнастий видалений із запасу</string>
+    <string name="note_deletion_title">Видалення шкідливого</string>
+    <string name="note_deletion_message">Більше не хочу його знати!</string>
+    <string name="note_info">Інформація</string>
+    <string name="save">Зберегти</string>
+    <string name="search">Пошук</string>
+    <string name="sort_by">Сортування</string>
+    <string name="sort_by_title">Назва</string>
+    <string name="sort_by_date">Дата</string>
+    <string name="title">Назва</string>
+    <string name="yes">Так</string>
 </resources>

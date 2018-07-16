@@ -28,6 +28,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation 'com.pawegio.kandroid:kandroid:0.8.7@aar'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
@@ -43,10 +44,11 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
 
     implementation 'com.google.dagger:dagger:2.16'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.16'
 
     implementation 'com.arello-mobile:moxy:1.5.5'
     implementation 'com.arello-mobile:moxy-android:1.5.5'
+    implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
     kapt 'com.arello-mobile:moxy-compiler:1.5.5'
 
     implementation 'com.reactiveandroid:reactiveandroid:1.4.3'
@@ -55,4 +57,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+}
+
+repositories {
+    mavenCentral()
 }

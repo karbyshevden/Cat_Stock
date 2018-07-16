@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Кошачий запас</string>
+    <string name="notes_list_empty">У тебя в запасе ни одного пушистого, \\nсрочно жми \"+\"</string>
+    <string name="input_your_text">Расскажи про своего усатого...</string>
+    <string name="no">Нет</string>
+    <string name="note_deleted">Котик удален</string>
+    <string name="note_deletion_title">Удаление царапучего</string>
+    <string name="note_deletion_message">Всё, он нам больше не друг?</string>
+    <string name="note_info">Информация</string>
+    <string name="save">Сохранить</string>
+    <string name="search">Поиск</string>
+    <string name="sort_by">Сортировка</string>
+    <string name="sort_by_title">Название</string>
+    <string name="sort_by_date">Дата</string>
+    <string name="title">Название</string>
+    <string name="yes">Да</string>
+    <string name="delete_all">Всех во двор</string>
+    <string name="delete">Удалить</string>
+    <string name="all_notes_deleted">Больше никого...(</string>
 </resources>
