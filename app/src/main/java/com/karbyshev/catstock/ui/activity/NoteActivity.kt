@@ -3,6 +3,7 @@ package com.karbyshev.catstock.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,15 +17,20 @@ import com.karbyshev.catstock.R
 import com.karbyshev.catstock.mvp.model.Item
 import com.karbyshev.catstock.mvp.presenter.NotePresenter
 import com.karbyshev.catstock.mvp.view.NoteView
+import com.karbyshev.catstock.ui.common.ImageUtils
 import com.karbyshev.catstock.util.formatDate
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_note.*
+import org.jetbrains.anko.toast
+import java.io.File
 
 class NoteActivity : MvpAppCompatActivity(), NoteView {
 
     companion object {
         const val NOTE_DELETE_ARG = "note_id"
+        const val GALLERY = 1
 
-        fun buildIntent(activity: Activity, noteId: Long) : Intent {
+        fun buildIntent(activity: Activity, noteId: Long): Intent {
             val intent = Intent(activity, NoteActivity::class.java)
             intent.putExtra(NOTE_DELETE_ARG, noteId)
             return intent
@@ -36,10 +42,11 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
     private var noteDeleteDialog: MaterialDialog? = null
     private var noteInfoDialog: MaterialDialog? = null
 
+
     @ProvidePresenter
     fun provideHelloPresenter(): NotePresenter {
         val noteId = intent.extras.getLong(NOTE_DELETE_ARG, -1)
-        return NotePresenter(noteId)
+        return NotePresenter(noteId, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +59,14 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
                 editText.setSelection((editText.text.length))
             }
         }
+
+        attachFloatingActionButton.setOnClickListener { attachPhoto() }
     }
 
     override fun onStop() {
         super.onStop()
 
-        if (noteTitleEditText.text.isEmpty()){
+        if (noteTitleEditText.text.isEmpty()) {
             presenter.deleteNote()
         } else {
             presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
@@ -66,7 +75,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (noteTitleEditText.text.isEmpty()){
+        if (noteTitleEditText.text.isEmpty()) {
             presenter.deleteNote()
         } else {
             presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
@@ -77,6 +86,9 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
         noteDateTextView.text = formatDate(note.changedAt)
         noteTitleEditText.setText(note.title)
         noteTextEditText.setText(note.text)
+        if (note.image != "") {
+            Picasso.get().load(note.image).into(noteImageView)
+        }
     }
 
     override fun showNoteInfoDialog(noteInfo: String) {
@@ -124,7 +136,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (noteTitleEditText.text.isEmpty()){
+        if (noteTitleEditText.text.isEmpty()) {
             presenter.deleteNote()
         } else {
             presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
@@ -144,5 +156,21 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun attachPhoto() {
+        val galleryIntent = Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, GALLERY)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                presenter.addImage(data, noteImageView)
+            }
+        }
     }
 }

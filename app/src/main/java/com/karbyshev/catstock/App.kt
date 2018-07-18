@@ -8,6 +8,7 @@ import com.karbyshev.catstock.di.component.DaggerAppComponent
 import com.karbyshev.catstock.di.module.ItemDaoModule
 import com.karbyshev.catstock.mvp.model.AppDatabase
 import com.karbyshev.catstock.mvp.model.Item
+import com.karbyshev.catstock.network.RetrofitService
 import com.reactiveandroid.ReActiveAndroid
 import com.reactiveandroid.ReActiveConfig
 import com.reactiveandroid.internal.database.DatabaseConfig
@@ -19,6 +20,8 @@ class App: Application() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
+
+
 
     override fun onCreate() {
         super.onCreate()
@@ -34,5 +37,9 @@ class App: Application() {
         ReActiveAndroid.init(ReActiveConfig.Builder(this)
                 .addDatabaseConfigs(appDatabaseConfig)
                 .build())
+
+        RetrofitService.init()
+
+//        ApiService.createInterface()
     }
 }

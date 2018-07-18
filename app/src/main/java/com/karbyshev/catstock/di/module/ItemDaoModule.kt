@@ -11,4 +11,5 @@ class ItemDaoModule {
     @Provides
     @Singleton
     fun provideItemDao(): ItemDao = ItemDao()
+
 }
