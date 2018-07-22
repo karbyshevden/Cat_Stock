@@ -161,5 +161,4 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             2 -> presenter.showNoteDeleteDialog(notePosition)
         }
     }
-
 }

@@ -42,9 +42,9 @@ class MainPresenter : MvpPresenter<MainView>() {
     }
 
     fun deleteAllNotes() {
-        noteDao.deleteAllNotes()
-        notesList.removeAll(notesList)
-        viewState.onAllNotesDeleted()
+//        noteDao.deleteAllNotes()
+//        notesList.removeAll(notesList)
+//        viewState.onAllNotesDeleted()
     }
 
     fun deleteNoteByPosition(position: Int) {
@@ -103,7 +103,9 @@ class MainPresenter : MvpPresenter<MainView>() {
     }
 
     fun showNoteInfo(position: Int) {
-//        viewState.showNoteInfoDialog(notesList[position].getInfo())
+        noteRequest.add(RequestNotes.getNotes().subscribe{
+            viewState.showNoteInfoDialog(it[position].getInfo())
+        })
     }
 
     fun hideNoteInfoDialog() {
@@ -113,6 +115,7 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun loadAllNotes() {
 
         noteRequest.add(RequestNotes.getNotes().subscribe {
+            Collections.sort(it, getCurrentSortMethod())
             viewState.onNotesLoaded(it)
         })
 

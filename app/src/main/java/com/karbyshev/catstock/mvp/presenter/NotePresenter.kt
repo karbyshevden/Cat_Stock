@@ -74,7 +74,7 @@ class NotePresenter(private val noteId: Long, context: Context) : MvpPresenter<N
     }
 
     fun showNoteInfoDialog() {
-//        viewState.showNoteInfoDialog(note.getInfo())
+        viewState.showNoteInfoDialog(NetworkItem().getInfo())
     }
 
     fun hideNoteInfoDialog() {
@@ -83,12 +83,9 @@ class NotePresenter(private val noteId: Long, context: Context) : MvpPresenter<N
 
     fun addImage(data: Intent?, imageView: ImageView, context: Context) {
         val contentUri = data!!.data
-//        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
-//        imageView.setImageBitmap(bitmap)
         val file = File(imageUtils.getRealPathFromURI(contentUri))
         ImageUtils.savedImagePath = file.absolutePath
         imagePath = ImageUtils.fileUriPrefix + ImageUtils.savedImagePath
         Glide.with(context).load(imagePath).into(imageView)
     }
-
 }

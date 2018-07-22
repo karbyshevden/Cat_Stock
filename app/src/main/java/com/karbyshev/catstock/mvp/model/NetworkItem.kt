@@ -1,5 +1,6 @@
 package com.karbyshev.catstock.mvp.model
 
+
 data class NetworkItem(
         val id: Long,
         var title: String,
@@ -15,4 +16,8 @@ data class NetworkItem(
     }
 
     constructor() : this(0, "", "", "", "", "")
+
+    fun getInfo(): String = "Title: \n$title\n" +
+            "Created at: \n$createdAt\n" +
+            "Changed at: \n$updatedAt\n"
 }

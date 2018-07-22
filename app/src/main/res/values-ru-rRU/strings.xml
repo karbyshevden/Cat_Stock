@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Кошачий запас</string>
-    <string name="notes_list_empty">У тебя в запасе ни одного пушистого, \\nсрочно жми \"+\"</string>
+    <string name="notes_list_empty">У тебя в запасе ни одного пушистого, \nсрочно жми \"+\"</string>
     <string name="input_your_text">Расскажи про своего усатого...</string>
     <string name="no">Нет</string>
     <string name="note_deleted">Котик удален</string>
