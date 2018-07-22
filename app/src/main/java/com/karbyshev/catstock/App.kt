@@ -21,8 +21,6 @@ class App: Application() {
         lateinit var context: Context
     }
 
-
-
     override fun onCreate() {
         super.onCreate()
 
@@ -39,7 +37,5 @@ class App: Application() {
                 .build())
 
         RetrofitService.init()
-
-//        ApiService.createInterface()
     }
 }

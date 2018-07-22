@@ -1,11 +1,11 @@
 package com.karbyshev.catstock.mvp.view
 
 import com.arellomobile.mvp.MvpView
-import com.karbyshev.catstock.mvp.model.Item
+import com.karbyshev.catstock.mvp.model.NetworkItem
 
 interface NoteView : MvpView {
 
-    fun showNote(note: Item)
+    fun showNote(note: NetworkItem)
 
     fun onNoteSaved()
 

@@ -17,7 +17,7 @@ class RetrofitService {
 
         fun createInterface(): Retrofit {
             return Retrofit.Builder()
-                    .baseUrl("http://localhost:8080/apiImpl/")
+                    .baseUrl("http://192.168.0.109:8080/api/")
                     .client(createOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

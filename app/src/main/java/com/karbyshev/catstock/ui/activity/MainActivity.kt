@@ -12,7 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.karbyshev.catstock.R
-import com.karbyshev.catstock.mvp.model.Item
+import com.karbyshev.catstock.mvp.model.NetworkItem
 import com.karbyshev.catstock.mvp.presenter.MainPresenter
 import com.karbyshev.catstock.mvp.view.MainView
 import com.karbyshev.catstock.ui.adapter.MainAdapter
@@ -21,6 +21,7 @@ import com.pawegio.kandroid.onQueryChange
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MvpAppCompatActivity(), MainView {
+
 
     @InjectPresenter
     lateinit var presenter: MainPresenter
@@ -46,7 +47,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         presenter.loadAllNotes()
     }
 
-    override fun onNotesLoaded(notes: List<Item>) {
+    override fun onNotesLoaded(notes: List<NetworkItem>) {
         notesList.layoutManager = LinearLayoutManager(this)
         notesList.adapter = MainAdapter(notes)
         updateView()
@@ -73,7 +74,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         Toast.makeText(this, R.string.all_notes_deleted, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSearchResult(notes: List<Item>) {
+    override fun onSearchResult(notes: List<NetworkItem>) {
         notesList.layoutManager = LinearLayoutManager(this)
         notesList.adapter = MainAdapter(notes)
     }

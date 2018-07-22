@@ -7,13 +7,13 @@ import java.util.*
 
 class ItemDao {
 
-    fun createNote(): Item {
-        val note = Item("", Date())
-        note.save()
-        return note
-    }
+//    fun createNote(): Item {
+//        val note = Item("")//, Date())
+//        note.save()
+//        return note
+//    }
 
-    fun saveNote(note: Item): Long = note.save()
+//    fun saveNote(note: Item): Long = note.save()
 
     fun loadAllNotes(): MutableList<Item> = Select.from(Item::class.java).fetch()
 
@@ -21,6 +21,6 @@ class ItemDao {
 
     fun deleteAllNotes() = Delete.from(Item::class.java).execute()
 
-    fun deleteNote(note: Item) = note.delete()
+//    fun deleteNote(note: Item) = note.delete()
 }
 

@@ -3,16 +3,16 @@ package com.karbyshev.catstock.mvp.view
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.karbyshev.catstock.mvp.model.Item
+import com.karbyshev.catstock.mvp.model.NetworkItem
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface MainView : MvpView{
 
-    fun onNotesLoaded(notes: List<Item>)
+    fun onNotesLoaded(notes: List<NetworkItem>)
 
     fun updateView()
 
-    fun onSearchResult(notes: List<Item>)
+    fun onSearchResult(notes: List<NetworkItem>)
 
     fun onAllNotesDeleted()
 

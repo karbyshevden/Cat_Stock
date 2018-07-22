@@ -14,21 +14,20 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.karbyshev.catstock.R
-import com.karbyshev.catstock.mvp.model.Item
+import com.karbyshev.catstock.mvp.model.NetworkItem
 import com.karbyshev.catstock.mvp.presenter.NotePresenter
 import com.karbyshev.catstock.mvp.view.NoteView
-import com.karbyshev.catstock.ui.common.ImageUtils
 import com.karbyshev.catstock.util.formatDate
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_note.*
-import org.jetbrains.anko.toast
-import java.io.File
 
 class NoteActivity : MvpAppCompatActivity(), NoteView {
 
     companion object {
         const val NOTE_DELETE_ARG = "note_id"
         const val GALLERY = 1
+
+        lateinit var imagePath: String
 
         fun buildIntent(activity: Activity, noteId: Long): Intent {
             val intent = Intent(activity, NoteActivity::class.java)
@@ -63,31 +62,32 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
         attachFloatingActionButton.setOnClickListener { attachPhoto() }
     }
 
-    override fun onStop() {
-        super.onStop()
+//    override fun onStop() {
+//        super.onStop()
+//
+//        if (noteTitleEditText.text.isEmpty()) {
+//            presenter.deleteNote()
+//        } else {
+//            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
+//        }
+//    }
 
-        if (noteTitleEditText.text.isEmpty()) {
-            presenter.deleteNote()
-        } else {
-            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
-        }
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        if (noteTitleEditText.text.isEmpty()) {
+//            presenter.deleteNote()
+//        } else {
+//            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
+//        }
+//    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (noteTitleEditText.text.isEmpty()) {
-            presenter.deleteNote()
-        } else {
-            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
-        }
-    }
-
-    override fun showNote(note: Item) {
-        noteDateTextView.text = formatDate(note.changedAt)
+    override fun showNote(note: NetworkItem) {
+        noteDateTextView.text = note.updatedAt
         noteTitleEditText.setText(note.title)
-        noteTextEditText.setText(note.text)
-        if (note.image != "") {
-            Picasso.get().load(note.image).into(noteImageView)
+        noteTextEditText.setText(note.content)
+        imagePath = note.image
+        if (imagePath != "") {
+            Picasso.get().load(imagePath).into(noteImageView)
         }
     }
 
@@ -139,7 +139,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
         if (noteTitleEditText.text.isEmpty()) {
             presenter.deleteNote()
         } else {
-            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString())
+            presenter.saveNote(noteTitleEditText.text.toString(), noteTextEditText.text.toString(), imagePath)
         }
     }
 
@@ -169,7 +169,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
 
         if (requestCode == GALLERY) {
             if (data != null) {
-                presenter.addImage(data, noteImageView)
+                presenter.addImage(data, noteImageView, this.contentResolver)
             }
         }
     }

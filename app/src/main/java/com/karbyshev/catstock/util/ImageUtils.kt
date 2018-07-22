@@ -1,4 +1,4 @@
-package com.karbyshev.catstock.ui.common
+package com.karbyshev.catstock.util
 
 import android.content.Context
 import android.database.Cursor
