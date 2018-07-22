@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.widget.ImageView
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.bumptech.glide.Glide
 import com.karbyshev.catstock.App
 import com.karbyshev.catstock.mvp.model.ItemDao
 import com.karbyshev.catstock.mvp.model.NetworkItem
@@ -16,7 +17,6 @@ import com.karbyshev.catstock.mvp.view.NoteView
 import com.karbyshev.catstock.network.RequestNotes
 import com.karbyshev.catstock.ui.activity.NoteActivity.Companion.imagePath
 import com.karbyshev.catstock.util.ImageUtils
-import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
 import java.io.File
 import javax.inject.Inject
@@ -81,14 +81,14 @@ class NotePresenter(private val noteId: Long, context: Context) : MvpPresenter<N
         viewState.hideNoteInfoDialog()
     }
 
-    fun addImage(data: Intent?, imageView: ImageView, contentResolver: ContentResolver) {
+    fun addImage(data: Intent?, imageView: ImageView, context: Context) {
         val contentUri = data!!.data
 //        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
 //        imageView.setImageBitmap(bitmap)
         val file = File(imageUtils.getRealPathFromURI(contentUri))
         ImageUtils.savedImagePath = file.absolutePath
-        val temp = ImageUtils.fileUriPrefix + ImageUtils.savedImagePath
         imagePath = ImageUtils.fileUriPrefix + ImageUtils.savedImagePath
+        Glide.with(context).load(imagePath).into(imageView)
     }
 
 }

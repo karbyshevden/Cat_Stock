@@ -13,12 +13,12 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
 import com.karbyshev.catstock.R
 import com.karbyshev.catstock.mvp.model.NetworkItem
 import com.karbyshev.catstock.mvp.presenter.NotePresenter
 import com.karbyshev.catstock.mvp.view.NoteView
 import com.karbyshev.catstock.util.formatDate
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_note.*
 
 class NoteActivity : MvpAppCompatActivity(), NoteView {
@@ -87,7 +87,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
         noteTextEditText.setText(note.content)
         imagePath = note.image
         if (imagePath != "") {
-            Picasso.get().load(imagePath).into(noteImageView)
+            Glide.with(this).load(imagePath).into(noteImageView)
         }
     }
 
@@ -169,7 +169,7 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
 
         if (requestCode == GALLERY) {
             if (data != null) {
-                presenter.addImage(data, noteImageView, this.contentResolver)
+                presenter.addImage(data, noteImageView, this)
             }
         }
     }
